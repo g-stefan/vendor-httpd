@@ -135,7 +135,7 @@ namespace Main {
 						return 1;
 					};
 				};
-				if(Shell::system(String("7zr a -mx9 -mmt4 -r -sse -w. -y -t7z ") + archive + " " + workspaceSource)) {
+				if(Shell::system(String("7zr a -mx9 -mmt4 -r- -sse -w. -y -t7z ") + archive + " " + workspaceSource)) {
 					printf("Error: Unable to compress source\r\n");
 					return 1;
 				};
