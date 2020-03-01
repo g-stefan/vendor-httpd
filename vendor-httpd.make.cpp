@@ -263,38 +263,7 @@ namespace Main {
 
 		if(doInstall) {
 
-			if(!Shell::copyDirRecursively(buildPath + "/httpd/bin", pathRepository + "/bin")) {
-				return 1;
-			};
-			if(!Shell::copyDirRecursively(buildPath + "/httpd/include", pathRepository + "/include")) {
-				return 1;
-			};
-			if(!Shell::copyDirRecursively(buildPath + "/httpd/lib", pathRepository + "/lib")) {
-				return 1;
-			};
-
-			if(!Shell::copyDirRecursively(buildPath + "/httpd/cgi-bin", pathRepository + "/cgi-bin")) {
-				return 1;
-			};
-			if(!Shell::copyDirRecursively(buildPath + "/httpd/conf", pathRepository + "/conf")) {
-				return 1;
-			};
-			if(!Shell::copyDirRecursively(buildPath + "/httpd/error", pathRepository + "/error")) {
-				return 1;
-			};
-			if(!Shell::copyDirRecursively(buildPath + "/httpd/htdocs", pathRepository + "/htdocs")) {
-				return 1;
-			};
-			if(!Shell::copyDirRecursively(buildPath + "/httpd/icons", pathRepository + "/icons")) {
-				return 1;
-			};
-			if(!Shell::copyDirRecursively(buildPath + "/httpd/logs", pathRepository + "/logs")) {
-				return 1;
-			};
-			if(!Shell::copyDirRecursively(buildPath + "/httpd/manual", pathRepository + "/manual")) {
-				return 1;
-			};
-			if(!Shell::copyDirRecursively(buildPath + "/httpd/modules", pathRepository + "/modules")) {
+			if(!Shell::copyDirRecursively(buildPath + "/httpd", pathRepository)) {
 				return 1;
 			};
 
