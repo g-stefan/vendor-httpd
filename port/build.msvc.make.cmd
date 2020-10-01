@@ -101,6 +101,6 @@ echo done > %WORKSPACE_PATH_BUILD%\build.done.flag
 
 rem ---
 
-call :cmdX xyo-cc --mode=%ACTION% --exe rotatelogsw --use-path=port/source --use-project=xyo.static --use-lib=libapr-1
+call :cmdX xyo-cc --mode=%ACTION% --exe rotatelogsw --use-path=util --use-project=xyo.static --use-lib=libapr-1
 
 copy /Y /B bin\rotatelogsw.exe build\httpd\bin\rotatelogsw.exe
