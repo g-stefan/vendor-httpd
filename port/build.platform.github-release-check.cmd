@@ -5,7 +5,7 @@ rem Created by Grigore Stefan <g_stefan@yahoo.com>
 
 SETLOCAL ENABLEDELAYEDEXPANSION
 
-echo -^> git-release-check vendor-httpd
+echo -^> github-release-check vendor-httpd
 
 set PROJECT=vendor-httpd
 SET PROJECT_VENDOR=%PROJECT:vendor-=%
