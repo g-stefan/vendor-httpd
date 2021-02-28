@@ -72,7 +72,7 @@ pushd build\cmake
 
 SET CMD_CONFIG=cmake
 SET CMD_CONFIG=%CMD_CONFIG% ../../source
-SET CMD_CONFIG=%CMD_CONFIG% -G "NMake Makefiles"
+SET CMD_CONFIG=%CMD_CONFIG% -G "Ninja"
 SET CMD_CONFIG=%CMD_CONFIG% -DCMAKE_BUILD_TYPE=Release
 SET CMD_CONFIG=%CMD_CONFIG% -DCMAKE_INSTALL_PREFIX=%WORKSPACE_PATH_BUILD%\httpd
 SET CMD_CONFIG=%CMD_CONFIG% -DCMAKE_PREFIX_PATH=%XYO_PATH_REPOSITORY%
@@ -81,11 +81,11 @@ if not exist %WORKSPACE_PATH_BUILD%\build.configured.flag %CMD_CONFIG%
 if errorlevel 1 goto makeError
 if not exist %WORKSPACE_PATH_BUILD%\build.configured.flag echo configured > %WORKSPACE_PATH_BUILD%\build.configured.flag
 
-nmake
+ninja
 if errorlevel 1 goto makeError
-nmake install
+ninja install
 if errorlevel 1 goto makeError
-nmake clean
+ninja clean
 if errorlevel 1 goto makeError
 
 goto buildDone
