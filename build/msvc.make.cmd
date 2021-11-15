@@ -37,35 +37,46 @@ pushd temp
 if not exist httpd\ mkdir httpd
 
 rem --- required
-
-set VENDOR=pcre-8.44-%XYO_PLATFORM%-dev
-set WEB_LINK=https://github.com/g-stefan/vendor-pcre/releases/download/v8.44/pcre-8.44-%XYO_PLATFORM%-dev.7z
+set VENDOR=pcre-8.45-%XYO_PLATFORM%-dev
+if not exist ..\..\vendor-pcre\release\%VENDOR%.7z goto pcre_getFromGitHub
+copy /Y /B ..\..\vendor-pcre\release\%VENDOR%.7z %VENDOR%.7z
+goto pcre_process
+:pcre_getFromGitHub
+set WEB_LINK=https://github.com/g-stefan/vendor-pcre/releases/download/v8.45/%VENDOR%.7z
 curl --insecure --location %WEB_LINK% --output %VENDOR%.7z
+:pcre_process
 7z x -aoa -o. %VENDOR%.7z
 xcopy  /Y /S /E "%VENDOR%\*" "httpd\"
 rmdir /Q /S %VENDOR%
 
 
 rem --- required
-
 set VENDOR=apr-1.7.0-%XYO_PLATFORM%-dev
-set WEB_LINK=https://github.com/g-stefan/vendor-apr/releases/download/v1.7.0/apr-1.7.0-%XYO_PLATFORM%-dev.7z
+if not exist ..\..\vendor-apr\release\%VENDOR%.7z goto apr_getFromGitHub
+copy /Y /B ..\..\vendor-apr\release\%VENDOR%.7z %VENDOR%.7z
+goto apr_process
+:apr_getFromGitHub
+set WEB_LINK=https://github.com/g-stefan/vendor-apr/releases/download/v1.7.0/%VENDOR%.7z
 curl --insecure --location %WEB_LINK% --output %VENDOR%.7z
+:apr_process
 7z x -aoa -o. %VENDOR%.7z
 xcopy  /Y /S /E "%VENDOR%\*" "httpd\"
 rmdir /Q /S %VENDOR%
 
 rem --- required
-
 set VENDOR=apr-util-1.6.1-%XYO_PLATFORM%-dev
-set WEB_LINK=https://github.com/g-stefan/vendor-apr-util/releases/download/v1.6.1/apr-util-1.6.1-%XYO_PLATFORM%-dev.7z
+if not exist ..\..\vendor-apr-util\release\%VENDOR%.7z goto apr_util_getFromGitHub
+copy /Y /B ..\..\vendor-apr-util\release\%VENDOR%.7z %VENDOR%.7z
+goto apr_util_process
+:apr_util_getFromGitHub
+set WEB_LINK=https://github.com/g-stefan/vendor-apr-util/releases/download/v1.6.1/%VENDOR%.7z
 curl --insecure --location %WEB_LINK% --output %VENDOR%.7z
+:apr_util_process
 7z x -aoa -o. %VENDOR%.7z
 xcopy  /Y /S /E "%VENDOR%\*" "httpd\"
 rmdir /Q /S %VENDOR%
 
 popd
-
 
 
 if not exist temp\cmake mkdir temp\cmake
