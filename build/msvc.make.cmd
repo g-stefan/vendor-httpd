@@ -6,7 +6,7 @@ rem Created by Grigore Stefan <g_stefan@yahoo.com>
 set ACTION=%1
 if "%1" == "" set ACTION=make
 
-echo -^> %ACTION% vendor-httpd
+echo - %BUILD_PROJECT% ^> %1
 
 goto cmdXDefined
 :cmdX
@@ -38,6 +38,10 @@ if not exist httpd\ mkdir httpd
 
 rem --- required
 set VENDOR=pcre-8.45-%XYO_PLATFORM%-dev
+if not exist %XYO_PATH_RELEASE%\%VENDOR%.7z goto pcre_getFromLocal
+copy /Y /B %XYO_PATH_RELEASE%\%VENDOR%.7z %VENDOR%.7z
+goto pcre_process
+:pcre_getFromLocal
 if not exist ..\..\vendor-pcre\release\%VENDOR%.7z goto pcre_getFromGitHub
 copy /Y /B ..\..\vendor-pcre\release\%VENDOR%.7z %VENDOR%.7z
 goto pcre_process
@@ -52,6 +56,10 @@ rmdir /Q /S %VENDOR%
 
 rem --- required
 set VENDOR=apr-1.7.0-%XYO_PLATFORM%-dev
+if not exist %XYO_PATH_RELEASE%\%VENDOR%.7z goto apr_getFromLocal
+copy /Y /B %XYO_PATH_RELEASE%\%VENDOR%.7z %VENDOR%.7z
+goto apr_process
+:apr_getFromLocal
 if not exist ..\..\vendor-apr\release\%VENDOR%.7z goto apr_getFromGitHub
 copy /Y /B ..\..\vendor-apr\release\%VENDOR%.7z %VENDOR%.7z
 goto apr_process
@@ -65,6 +73,10 @@ rmdir /Q /S %VENDOR%
 
 rem --- required
 set VENDOR=apr-util-1.6.1-%XYO_PLATFORM%-dev
+if not exist %XYO_PATH_RELEASE%\%VENDOR%.7z goto apr_util_getFromLocal
+copy /Y /B %XYO_PATH_RELEASE%\%VENDOR%.7z %VENDOR%.7z
+goto apr_util_process
+:apr_util_getFromLocal
 if not exist ..\..\vendor-apr-util\release\%VENDOR%.7z goto apr_util_getFromGitHub
 copy /Y /B ..\..\vendor-apr-util\release\%VENDOR%.7z %VENDOR%.7z
 goto apr_util_process
