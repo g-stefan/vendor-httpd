@@ -790,7 +790,7 @@ int applicationMain (int argc, const char * const argv[])
 // - suport subsytem windows [no console window]
 //
 
-#include "xyo.hpp"
+#include <XYO/System.hpp>
 
 int __stdcall WinMain(HINSTANCE hInstance,HINSTANCE hPrevInstance,LPSTR cmdLine,int cmdShow)
 {
@@ -799,9 +799,9 @@ int __stdcall WinMain(HINSTANCE hInstance,HINSTANCE hPrevInstance,LPSTR cmdLine,
 	char** cmdS;
 	int retV;
 	GetModuleFileName(nullptr,exeName,MAX_PATH);
-	XYO::Shell::mainArgsSet(exeName,GetCommandLineA(),cmdN,cmdS);
+	XYO::System::Shell::mainArgsSet(exeName,GetCommandLineA(),cmdN,cmdS);
 	retV=applicationMain(cmdN,cmdS);
-	XYO::Shell::mainArgsDelete(cmdN,cmdS);
+	XYO::System::Shell::mainArgsDelete(cmdN,cmdS);
 	return retV;
 }
 
