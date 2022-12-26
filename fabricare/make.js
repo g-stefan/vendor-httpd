@@ -25,54 +25,61 @@ Shell.mkdirRecursivelyIfNotExists("temp");
 Shell.mkdirRecursivelyIfNotExists("temp/cmake");
 
 // required
-Shell.mkdirRecursivelyIfNotExists("vendor");
-// ---
-var vendor="pcre-8.45-"+Platform.name+"-dev.7z";
-if(Shell.fileExists(pathRelease+"/"+vendor)){
-	Shell.copyFile(pathRelease+"/"+vendor,"vendor/"+vendor);
-}else
-if(Shell.fileExists("../vendor-apr/release/"+vendor)){
-	Shell.copyFile("../vendor-apr/release/"+vendor,"vendor/"+vendor);
+if (Shell.directoryExists("../vendor-pcre/output")) {
+	exitIf(!Shell.copyDirRecursively("../vendor-pcre/output", "output"));
 } else {
-	var webLink="https://github.com/g-stefan/vendor-pcre/releases/download/v8.45/"+vendor;
-	exitIf(Shell.system("curl --insecure --location "+webLink+" --output vendor/"+vendor));
+	Shell.mkdirRecursivelyIfNotExists("vendor");
+	// ---
+	var vendor = "pcre-8.45-" + Platform.name + "-dev.7z";
+	if (Shell.fileExists(pathRelease + "/" + vendor)) {
+		Shell.copyFile(pathRelease + "/" + vendor, "vendor/" + vendor);
+	} else if (Shell.fileExists("../vendor-apr/release/" + vendor)) {
+		Shell.copyFile("../vendor-apr/release/" + vendor, "vendor/" + vendor);
+	} else {
+		var webLink = "https://github.com/g-stefan/vendor-pcre/releases/download/v8.45/" + vendor;
+		exitIf(Shell.system("curl --insecure --location " + webLink + " --output vendor/" + vendor));
+	};
+	exitIf(Shell.system("7z x -aoa -ooutput/ vendor/" + vendor));
 };
-exitIf(Shell.system("7z x -aoa -ooutput/ vendor/"+vendor));
 // ---
-var vendor="apr-util-1.6.1-"+Platform.name+"-dev.7z";
-if(Shell.fileExists(pathRelease+"/"+vendor)){
-	Shell.copyFile(pathRelease+"/"+vendor,"vendor/"+vendor);
-}else
-if(Shell.fileExists("../vendor-apr/release/"+vendor)){
-	Shell.copyFile("../vendor-apr/release/"+vendor,"vendor/"+vendor);
+if (Shell.directoryExists("../vendor-apr-util/output")) {
+	exitIf(!Shell.copyDirRecursively("../vendor-apr-util/output", "output"));
 } else {
-	var webLink="https://github.com/g-stefan/vendor-apr-util/releases/download/v1.6.1/"+vendor;
-	exitIf(Shell.system("curl --insecure --location "+webLink+" --output vendor/"+vendor));
+	Shell.mkdirRecursivelyIfNotExists("vendor");
+	var vendor = "apr-util-1.6.1-" + Platform.name + "-dev.7z";
+	if (Shell.fileExists(pathRelease + "/" + vendor)) {
+		Shell.copyFile(pathRelease + "/" + vendor, "vendor/" + vendor);
+	} else if (Shell.fileExists("../vendor-apr/release/" + vendor)) {
+		Shell.copyFile("../vendor-apr/release/" + vendor, "vendor/" + vendor);
+	} else {
+		var webLink = "https://github.com/g-stefan/vendor-apr-util/releases/download/v1.6.1/" + vendor;
+		exitIf(Shell.system("curl --insecure --location " + webLink + " --output vendor/" + vendor));
+	};
+	exitIf(Shell.system("7z x -aoa -ooutput/ vendor/" + vendor));
 };
-exitIf(Shell.system("7z x -aoa -ooutput/ vendor/"+vendor));
 // ---
 
 if (!Shell.fileExists("temp/build.config.flag")) {
-	Shell.copyFile("fabricare/CMakeLists.txt","source/CMakeLists.txt");
+	Shell.copyFile("fabricare/CMakeLists.txt", "source/CMakeLists.txt");
 
-	Shell.setenv("CC","cl.exe");
-	Shell.setenv("CXX","cl.exe");
+	Shell.setenv("CC", "cl.exe");
+	Shell.setenv("CXX", "cl.exe");
 
-	cmdConfig="cmake";
-	cmdConfig+=" ../../source";
-	cmdConfig+=" -G \"Ninja\"";
-	cmdConfig+=" -DCMAKE_BUILD_TYPE=Release";
-	cmdConfig+=" -DCMAKE_INSTALL_PREFIX="+Shell.realPath(Shell.getcwd())+"\\output";
-	cmdConfig+=" -DCMAKE_PREFIX_PATH="+pathRepository;
+	cmdConfig = "cmake";
+	cmdConfig += " ../../source";
+	cmdConfig += " -G \"Ninja\"";
+	cmdConfig += " -DCMAKE_BUILD_TYPE=Release";
+	cmdConfig += " -DCMAKE_INSTALL_PREFIX=" + Shell.realPath(Shell.getcwd()) + "\\output";
+	cmdConfig += " -DCMAKE_PREFIX_PATH=" + pathRepository;
 
-	runInPath("temp/cmake",function(){
+	runInPath("temp/cmake", function() {
 		exitIf(Shell.system(cmdConfig));
 	});
 
 	Shell.filePutContents("temp/build.config.flag", "done");
 };
 
-runInPath("temp/cmake",function(){
+runInPath("temp/cmake", function() {
 	exitIf(Shell.system("ninja"));
 	exitIf(Shell.system("ninja install"));
 	exitIf(Shell.system("ninja clean"));
@@ -88,10 +95,9 @@ var compileProject = {
 };
 
 Project.dependency = [
-		"xyo-system"
+	"xyo-system"
 ];
 
 compileExeStatic(compileProject);
 
 Shell.filePutContents("temp/build.done.flag", "done");
-
