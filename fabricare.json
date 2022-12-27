@@ -2,7 +2,7 @@
 	"project": {
 		"name" : "httpd",
 		"type" : "xyo-cpp",
-		"SPDX-License-Identifier": "LicenseRef-",
+		"SPDX-License-Identifier": "Apache-2.0",
 		"sourceLink" : "https://httpd.apache.org/download.cgi",
 		"version" : "2.4.54"
 	}
