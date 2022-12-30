@@ -33,8 +33,8 @@ if (Shell.directoryExists("../vendor-pcre/output")) {
 	var vendor = "pcre-8.45-" + Platform.name + "-dev.7z";
 	if (Shell.fileExists(pathRelease + "/" + vendor)) {
 		Shell.copyFile(pathRelease + "/" + vendor, "vendor/" + vendor);
-	} else if (Shell.fileExists("../vendor-apr/release/" + vendor)) {
-		Shell.copyFile("../vendor-apr/release/" + vendor, "vendor/" + vendor);
+	} else if (Shell.fileExists("../vendor-pcre/release/" + vendor)) {
+		Shell.copyFile("../vendor-pcre/release/" + vendor, "vendor/" + vendor);
 	} else {
 		var webLink = "https://github.com/g-stefan/vendor-pcre/releases/download/v8.45/" + vendor;
 		exitIf(Shell.system("curl --insecure --location " + webLink + " --output vendor/" + vendor));
