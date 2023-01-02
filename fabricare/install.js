@@ -5,5 +5,5 @@
 
 messageAction("install");
 
-forceRemoveDirRecursively(pathRepository + "/opt/httpd");
+Shell.removeDirRecursivelyForce(pathRepository + "/opt/httpd");
 exitIf(!Shell.copyDirRecursively("output", pathRepository + "/opt/httpd"));
