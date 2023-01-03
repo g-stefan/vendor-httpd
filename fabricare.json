@@ -1,14 +1,19 @@
 {
-	"project": {
-		"name" : "httpd",
+	"solution": {
+		"name" : "vendor-httpd",
 		"type" : "xyo-cpp",
-		"SPDX-License-Identifier": "Apache-2.0",
-		"sourceLink" : "https://httpd.apache.org/download.cgi",
-		"version" : "2.4.54",
-		"hasRelease" : true,
-		"noVersion" : true,
+		"projects": [
+			{
+				"name" : "httpd",
+				"SPDX-License-Identifier": "Apache-2.0",
+				"sourceLink" : "https://httpd.apache.org/download.cgi",
+				"version" : "2.4.54",
+				"noVersion" : true
+			}
+		],
+		"releaseName" : "httpd",
 		"releaseOutput" : true,
-		"githubRelease" : true,
-		"githubRepository" : "vendor-httpd"
+		"hasGithub" : true
 	}
 }
+
