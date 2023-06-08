@@ -7,13 +7,12 @@
 				"name" : "httpd",
 				"SPDX-License-Identifier": "Apache-2.0",
 				"sourceLink" : "https://httpd.apache.org/download.cgi",
-				"version" : "2.4.56",
+				"version" : "2.4.57",
 				"noVersion" : true
 			}
 		],
 		"releaseName" : "httpd",
-		"releaseOutput" : true,
-		"hasGithub" : true
+		"releaseOutput" : true
 	}
 }
 
