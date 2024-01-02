@@ -1,6 +1,6 @@
 // Created by Grigore Stefan <g_stefan@yahoo.com>
 // Public domain (Unlicense) <http://unlicense.org>
-// SPDX-FileCopyrightText: 2022-2023 Grigore Stefan <g_stefan@yahoo.com>
+// SPDX-FileCopyrightText: 2022-2024 Grigore Stefan <g_stefan@yahoo.com>
 // SPDX-License-Identifier: Unlicense
 
 Fabricare.include("vendor");
@@ -60,7 +60,7 @@ if (Shell.directoryExists("../vendor-apr-util/output")) {
 // ---
 
 if (!Shell.fileExists("temp/build.config.flag")) {
-	Shell.copyFile("fabricare/CMakeLists.txt", "source/CMakeLists.txt");
+	Shell.copyFile("fabricare/source/mod_xml2enc.c","source/modules/filters/mod_xml2enc.c");
 
 	Shell.setenv("CC", "cl.exe");
 	Shell.setenv("CXX", "cl.exe");
