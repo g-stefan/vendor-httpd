@@ -98,6 +98,6 @@ Project.dependency = [
 	"xyo-system"
 ];
 
-compileExeStatic(compileProject);
+compileExe(compileProject);
 
 Shell.filePutContents("temp/build.done.flag", "done");
