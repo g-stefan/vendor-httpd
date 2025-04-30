@@ -794,14 +794,12 @@ int applicationMain (int argc, const char * const argv[])
 
 int __stdcall WinMain(HINSTANCE hInstance,HINSTANCE hPrevInstance,LPSTR cmdLine,int cmdShow)
 {
+    XYO::System::ShellArguments shellArguments;
 	char exeName[MAX_PATH];
-	int cmdN;
-	char** cmdS;
 	int retV;
 	GetModuleFileName(nullptr,exeName,MAX_PATH);
-	XYO::System::Shell::mainArgsSet(exeName,GetCommandLineA(),cmdN,cmdS);
-	retV=applicationMain(cmdN,cmdS);
-	XYO::System::Shell::mainArgsDelete(cmdN,cmdS);
+	shellArguments.set(exeName,GetCommandLineA());
+	retV=applicationMain(shellArguments.cmdN,shellArguments.cmdS);	
 	return retV;
 }
 
