@@ -30,7 +30,7 @@ if (Shell.directoryExists("../vendor-pcre/output")) {
 } else {
 	Shell.mkdirRecursivelyIfNotExists("vendor");
 	// ---
-	var vendor = "pcre-8.45-" + Platform.name + "-dev.7z";
+	var vendor = "xyo.pcre.v8.45." + Platform.name + ".dev.zip";
 	if (Shell.fileExists(pathRelease + "/" + vendor)) {
 		Shell.copyFile(pathRelease + "/" + vendor, "vendor/" + vendor);
 	} else if (Shell.fileExists("../vendor-pcre/release/" + vendor)) {
@@ -46,7 +46,7 @@ if (Shell.directoryExists("../vendor-apr-util/output")) {
 	exitIf(!Shell.copyDirRecursively("../vendor-apr-util/output", "output"));
 } else {
 	Shell.mkdirRecursivelyIfNotExists("vendor");
-	var vendor = "apr-util-1.6.3-" + Platform.name + "-dev.7z";
+	var vendor = "xyo.apr-util.v1.6.3." + Platform.name + ".dev.zip";
 	if (Shell.fileExists(pathRelease + "/" + vendor)) {
 		Shell.copyFile(pathRelease + "/" + vendor, "vendor/" + vendor);
 	} else if (Shell.fileExists("../vendor-apr-util/release/" + vendor)) {
@@ -60,6 +60,7 @@ if (Shell.directoryExists("../vendor-apr-util/output")) {
 // ---
 
 if (!Shell.fileExists("temp/build.config.flag")) {
+	Shell.copyFile("fabricare/source/CMakeLists.txt", "source/CMakeLists.txt");
 	Shell.copyFile("fabricare/source/mod_xml2enc.c","source/modules/filters/mod_xml2enc.c");
 
 	Shell.setenv("CC", "cl.exe");
