@@ -30,14 +30,14 @@ if (Shell.directoryExists("../vendor-pcre/output")) {
 } else {
 	Shell.mkdirRecursivelyIfNotExists("vendor");
 	// ---
-	var vendor = "xyo.pcre.v8.45." + Platform.name + ".dev.zip";
+	var vendor = "pcre.v8.45." + Platform.name + ".dev.zip";
 	if (Shell.fileExists(pathRelease + "/" + vendor)) {
 		Shell.copyFile(pathRelease + "/" + vendor, "vendor/" + vendor);
 	} else if (Shell.fileExists("../vendor-pcre/release/" + vendor)) {
 		Shell.copyFile("../vendor-pcre/release/" + vendor, "vendor/" + vendor);
 	} else {
 		var webLink = "https://github.com/g-stefan/vendor-pcre/releases/download/v8.45/" + vendor;
-		exitIf(Shell.system("curl --insecure --location " + webLink + " --output vendor/" + vendor));
+		exitIf(Shell.system("curl --ca-native --location " + webLink + " --output vendor/" + vendor));
 	};
 	exitIf(Shell.system("7z x -aoa -ooutput/ vendor/" + vendor));
 };
@@ -46,14 +46,14 @@ if (Shell.directoryExists("../vendor-apr-util/output")) {
 	exitIf(!Shell.copyDirRecursively("../vendor-apr-util/output", "output"));
 } else {
 	Shell.mkdirRecursivelyIfNotExists("vendor");
-	var vendor = "xyo.apr-util.v1.6.3." + Platform.name + ".dev.zip";
+	var vendor = "apr-util.v1.6.3." + Platform.name + ".dev.zip";
 	if (Shell.fileExists(pathRelease + "/" + vendor)) {
 		Shell.copyFile(pathRelease + "/" + vendor, "vendor/" + vendor);
 	} else if (Shell.fileExists("../vendor-apr-util/release/" + vendor)) {
 		Shell.copyFile("../vendor-apr-util/release/" + vendor, "vendor/" + vendor);
 	} else {
 		var webLink = "https://github.com/g-stefan/vendor-apr-util/releases/download/v1.6.3/" + vendor;
-		exitIf(Shell.system("curl --insecure --location " + webLink + " --output vendor/" + vendor));
+		exitIf(Shell.system("curl --ca-native --location " + webLink + " --output vendor/" + vendor));
 	};
 	exitIf(Shell.system("7z x -aoa -ooutput/ vendor/" + vendor));
 };

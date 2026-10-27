@@ -1,6 +1,5 @@
 {
 	"solution": {
-		"namespace" : "xyo",
 		"name" : "vendor-httpd",
 		"type" : "xyo-cpp",
 		"projects": [

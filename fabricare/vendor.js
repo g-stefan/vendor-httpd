@@ -27,7 +27,7 @@ if (Shell.hasEnv("VENDOR_SOURCE_AUTH")) {
 	vendorSourceAuth = Shell.getenv("VENDOR_SOURCE_AUTH");
 };
 
-exitIf(Shell.system("curl --insecure --location " + vendorSourceGit + "/vendor-" + Project.name + "/releases/download/v" + Project.version + "/" + Project.vendor + ".7z "+vendorSourceAuth+" --output archive/" + Project.vendor + ".7z"));
+exitIf(Shell.system("curl --ca-native --location " + vendorSourceGit + "/vendor-" + Project.name + "/releases/download/v" + Project.version + "/" + Project.vendor + ".7z "+vendorSourceAuth+" --output archive/" + Project.vendor + ".7z"));
 if (Shell.getFileSize("archive/" + Project.vendor + ".7z") > 32768) {
 	return;
 };
@@ -38,7 +38,7 @@ runInPath("archive", function() {
 	webLink = "https://dlcdn.apache.org/httpd/httpd-" + Project.version + ".tar.gz";
 	Console.writeLn("Download: "+webLink);
 	if (!Shell.fileExists(Project.vendor + ".tar.gz")) {
-		exitIf(Shell.system("curl --insecure --location " + webLink + " --output " + Project.vendor + ".tar.gz"));
+		exitIf(Shell.system("curl --ca-native --location " + webLink + " --output " + Project.vendor + ".tar.gz"));
 		if (Shell.getFileSize(Project.vendor + ".tar.gz") < 1024) {			
 			return;
 		};
